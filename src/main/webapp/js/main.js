@@ -499,6 +499,9 @@ function configureViewEmpReimbView() {
                 }
             }
             
+        }else if(xhr.readyState == 4 && xhr.status == 404){
+            var myTableDiv = document.getElementById("view-reimb-table");
+            myTableDiv.innerHTML = '<h2>Sorry it looks like you dont have any Reimbursements...<h2>';
         }
     }
 }

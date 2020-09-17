@@ -2,6 +2,9 @@ package com.revature.dtos;
 
 import java.util.Objects;
 
+/**
+ * A DTO to facilitate simple approving and denying of reimburesements
+ */
 public class ApproveDeny {
     private Integer status;
     private Integer id;
