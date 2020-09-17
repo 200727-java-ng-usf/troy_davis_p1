@@ -3,6 +3,9 @@ package com.revature.dtos;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * A DTO to facilitate easy transferring of Error Responses
+ */
 public class ErrorResponse {
 
     private int status;

@@ -2,7 +2,9 @@ package com.revature.dtos;
 
 import java.sql.Blob;
 import java.util.Objects;
-
+/**
+ * A DTO to facilitate easy transferring reimbursements
+ */
 public class RbDTO {
     private Integer id;
     private Double amount;

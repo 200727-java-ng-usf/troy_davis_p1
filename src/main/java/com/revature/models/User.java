@@ -3,29 +3,17 @@ package com.revature.models;
 
 import java.util.Objects;
 
-
+/**
+ * Base constructs for users, store only the integer representation of roles in the db for easier role checking
+ */
 public class User {
-
     private int userId;
-
-
     private String username;
-
-
     private String password;
-
-
     private String firstname;
-
-
     private String lastname;
-
-
     private String email;
-
-
     private Integer userRole;
-
     public User() {
         super();
     }

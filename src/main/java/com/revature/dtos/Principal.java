@@ -7,6 +7,9 @@ import com.revature.models.User;
 
 import java.util.Objects;
 
+/**
+ * A DTO to facilitate easy transferring of user credentials
+ */
 public class Principal {
 
     private int id;

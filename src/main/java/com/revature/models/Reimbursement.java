@@ -4,13 +4,15 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * The base unit of the ERS system. ready to include images
+ */
 public class Reimbursement {
     private Integer id;
     private Double amount;
     private Timestamp submitted;
     private Timestamp resolved;
     private String description;
-    //TODO: ATTACH IMAGE STORE
     private File receipt;
     private int authorId;
     private int resolverId;

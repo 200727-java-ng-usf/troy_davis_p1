@@ -24,26 +24,6 @@ public enum ReimbursementType {
 
         return OTHER;
 
-        // functional implementation of the above code
-//        return Arrays.stream(Role.values())
-//                .filter(role -> role.roleName.equals(name))
-//                .findFirst()
-//                .orElse(LOCKED);
-
-    }
-
-    public static ReimbursementType getByNumber(Integer number){
-        switch (number){
-            case 1:
-                return LODGING;
-            case 2:
-                return TRAVEL;
-            case 3:
-                return FOOD;
-            case 4:
-                return OTHER;
-        }
-        return OTHER;
     }
 
     @Override

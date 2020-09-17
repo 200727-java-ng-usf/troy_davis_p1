@@ -2,6 +2,9 @@ package com.revature.dtos;
 
 import java.util.Objects;
 
+/**
+ * A DTO to facilitate easy transferring of user credentials
+ */
 public class Credentials {
 
     private String username;
