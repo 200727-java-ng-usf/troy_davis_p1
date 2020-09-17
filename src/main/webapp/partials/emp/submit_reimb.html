@@ -1,0 +1,81 @@
+<div id="submit-reimbursement-container">
+    <h2>Submit New ERS Reimbursement:</h2>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="amount">Amount</label>
+            <input name="amount" type="" class="form-control" id="amount" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="description">Enter Details</label>
+            <textarea name="description" class="form-control" id="description" rows="3" required></textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label for="type">Type</label>
+            <select class="custom-select" id="type" required name="type">
+                <option selected disabled value="">Choose</option>
+                <option>LODGING</option>
+                <option>TRAVEL</option>
+                <option>FOOD</option>
+                <option>OTHER</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid Type.
+            </div>
+        </div>
+    </div>
+
+    <div id="reg-button-container">
+        <button type="submit" class="btn btn-warning" id="register">Submit Reimbursement</button>
+    </div>
+    <div class="alert alert-danger" id="reg-message"></div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="submit-reimbursement-container">
+    <h3>Submit A Reimbursement Request</h3>
+    <p>Please Enter Reimbursement Details:</p>
+    <div class="form-group">
+        <label for="amount">Example Amount</label>
+        <input placeholder="$" id="amount" name="amount" value="default value"/><br>
+    </div>
+    <div class="form-group">
+        <label for="description">Enter Details</label>
+        <textarea class="form-control" id="description" rows="3"
+              placeholder="Description of Reimbursement" name="description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="type">Select Type</label>
+        <select class="form-control" id="type" name="type">
+            <option>Lodging</option>
+            <option>Travel</option>
+            <option>Food</option>
+            <option>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="file" id="image" onchange="showFiles(event)" accept="image/x-png,image/jpeg">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="submit_reimb"/><br>
+    </div>
+</div> -->

@@ -1,15 +1,30 @@
 package com.revature.models;
 
+
 import java.util.Objects;
 
+
 public class User {
+
     private int userId;
+
+
     private String username;
+
+
     private String password;
+
+
     private String firstname;
+
+
     private String lastname;
+
+
     private String email;
-    private Role userRole;
+
+
+    private Integer userRole;
 
     public User() {
         super();
@@ -23,7 +38,7 @@ public class User {
         this.email = email;
     }
 
-    public User(int userId, String username, String password, String firstname, String lastname, String email, Role userRole) {
+    public User(int userId, String username, String password, String firstname, String lastname, String email, Integer userRole) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -81,11 +96,11 @@ public class User {
         this.email = email;
     }
 
-    public Role getUserRole() {
+    public Integer getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Role userRole) {
+    public void setUserRole(Integer userRole) {
         this.userRole = userRole;
     }
 
@@ -100,7 +115,7 @@ public class User {
                 Objects.equals(getFirstname(), user.getFirstname()) &&
                 Objects.equals(getLastname(), user.getLastname()) &&
                 Objects.equals(getEmail(), user.getEmail()) &&
-                getUserRole() == user.getUserRole();
+                Objects.equals(getUserRole(), user.getUserRole());
     }
 
     @Override

@@ -8,6 +8,9 @@ create table ers_user_roles(
 INSERT INTO project_1.ers_user_roles
 (role_name)
 VALUES('ADMIN'),('FINANCE_MANAGER'),('EMPLOYEE');
+INSERT INTO project_1.ers_user_roles
+(role_name)
+VALUES('DELETED');
 
 -- +++--------------------------------------------+++ --
 create table ers_reimbursement_types(
@@ -42,6 +45,8 @@ create table ers_users(
 	last_name varchar(25) not null,
 	email varchar(256) unique not null,
 	user_role_id int not null,
+	is_active boolean default true,
+	
 	
 	constraint ers_user_id
 	primary key (id),
@@ -57,12 +62,12 @@ create table ers_users(
 
 -- Drop table
 
- DROP TABLE project_1.ers_reimbursements;
+-- DROP TABLE project_1.ers_reimbursements;
 
 create TABLE project_1.ers_reimbursements (
 	id serial NOT NULL,
 	amount numeric(6,2) NOT NULL,
-	submitted timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	submitted timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	resolved timestamp NULL,
 	description varchar(1000) NULL,
 	reciept bytea,
@@ -101,10 +106,10 @@ REFERENCES project_1.ers_users(id);
 
 INSERT INTO project_1.ers_users
 (username, password, first_name, last_name, email, user_role_id)
-VALUES('tmd1990', crypt('password', gen_salt('bf', 10)), 'troy', 'davis', 'tmd1990@t.co', 1);
+VALUES('u6', crypt('password', gen_salt('bf', 10)), 'troy', 'davis', 'u6', 1);
 
 select * from project_1.ers_users eu 
-where password = crypt('password', password);
+where password = project_1.crypt('password', password);
 
 --https://www.meetspaceapp.com/2016/04/12/passwords-postgresql-pgcrypto.html
 
@@ -112,5 +117,22 @@ truncate ers_users ;
 
 select * from ers_users eu ;
 
+select * from ers_reimbursements er ;
 --needed to be able to hash and unhash the passwords
 CREATE EXTENSION pgcrypto;
+
+SELECT er.id, er.amount, er.description, er.reimbursement_status_id, 
+er.reimbursement_type_id, er.resolved, er.submitted,  er.author_id , er.resolver_id,
+author.first_name as author_first_name , author.last_name as author_last_name , 
+resolver.first_name as resolver_first_name, resolver.last_name as resolver_last_name
+FROM project_1.ers_reimbursements er
+left join project_1.ers_users author 
+on er.author_id = author.id
+left join project_1.ers_users resolver 
+on er.resolver_id = resolver.id;
+
+SELECT * FROM project_1.ers_reimbursements er
+join ers_users author 
+on er.author_id = author.id
+where author.username = 'u4';
+
