@@ -3,6 +3,7 @@ package com.revature.util;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,10 +17,19 @@ public class ConnectionFactory {
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
     private ConnectionFactory(){
-        try{
-            props.load(new FileReader("D:/Revature/troy_davis_p1/src/main/resources/application.properties"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        try {
+
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream propsInput = loader.getResourceAsStream("application.properties");
+
+            if (propsInput == null) {
+                props.setProperty("url", System.getProperty("url"));
+                props.setProperty("username", System.getProperty("username"));
+                props.setProperty("password", System.getProperty("password"));
+            } else {
+                props.load(propsInput);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
