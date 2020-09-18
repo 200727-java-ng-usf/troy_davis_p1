@@ -4,6 +4,10 @@ package com.revature.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * one large switch statement to return the proper view requested.
+ * guards based off logged in role
+ */
 public class RequestViewHelper {
     public String process(HttpServletRequest req) {
         Integer loggedInRole = (Integer) req.getSession().getAttribute("loggedinrole");

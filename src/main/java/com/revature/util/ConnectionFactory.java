@@ -18,10 +18,8 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try {
-
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream propsInput = loader.getResourceAsStream("application.properties");
-
             if (propsInput == null) {
                 props.setProperty("url", System.getProperty("url"));
                 props.setProperty("username", System.getProperty("username"));

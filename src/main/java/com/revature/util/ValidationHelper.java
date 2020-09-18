@@ -6,6 +6,9 @@ import com.revature.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * A convenience method to validate emails and usernames that must be unique
+ */
 public class ValidationHelper {
 
     private final UserService userService = new UserService();

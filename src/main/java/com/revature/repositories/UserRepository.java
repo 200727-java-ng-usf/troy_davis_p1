@@ -50,40 +50,15 @@ public class UserRepository {
 
     public List<User> getAllusers() {
         List<User> users = new ArrayList<>();
-
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
             String sql = baseQuery + " order by eu.id";
-
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             users = mapResultSet(rs);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return users;
-    }
-
-
-    /**
-     * A method to get a single user by ID
-     * @param userId the user ID to search for
-     * @return returns an optional user
-     * @throws SQLException e
-     */
-    public Optional<User> getAUserById(Integer userId) {
-        Optional<User> user = Optional.empty();
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = baseQuery + "WHERE eu.id=? ";
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,userId);
-            ResultSet rs = psmt.executeQuery();
-            user = mapResultSet(rs).stream().findFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
     }
 
     /**
@@ -144,26 +119,6 @@ public class UserRepository {
         return user;
     }
 
-    /**
-     * A method to get a set of all users from the database by Role
-     * @param role the role to search for
-     * @return returns a set of users
-     * @throws SQLException e
-     */
-    public List<User> getAllUsersByRole(Role role) {
-        List<User> user = new ArrayList<>();
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            String sql = baseQuery + "WHERE eu.user_role_id=? order by eu.id";
-            PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setInt(1,role.ordinal() + 1);
-            ResultSet rs = psmt.executeQuery();
-            user = mapResultSet(rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
     //---------------------------------- UPDATE -------------------------------------------- //
 
     public boolean updateAUser(User newUser) {
@@ -185,25 +140,6 @@ public class UserRepository {
             e.printStackTrace();
         }
         return false;
-    }
-    /**
-     * A method to update the Role of a User in the database
-     * @param userId ID of the user in the DB
-     * @param newRole new Role of the User
-     * @return Returns true if 1 and only row was affected
-     * @throws SQLException
-     */
-    public boolean updateAUserRoleById(Integer userId, Role newRole) throws SQLException {
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = baseUpdate +
-                    "SET user_role_id=?\n" +
-                    "WHERE username=? ";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,newRole.ordinal() + 1);
-            ps.setInt(2,userId);
-            int rowsInserted = ps.executeUpdate();
-            return rowsInserted != 0;
-        }
     }
 
     //---------------------------------- DELETE -------------------------------------------- //

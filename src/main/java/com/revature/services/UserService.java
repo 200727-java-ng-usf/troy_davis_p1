@@ -64,61 +64,48 @@ public class UserService {
         }
         newUser.setUserRole(Role.EMPLOYEE.ordinal() + 1);
         userRepo.addUser(newUser);
-        System.out.println(newUser);
     }
 
     /**
      * Update a user in the DB.
-     * @param newUser
+     * @param newUser user to update
      */
     public void update(User newUser) {
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user field values provided during registration!");
         }
-        if (userRepo.updateAUser(newUser)){
-            System.out.println(newUser);
-        }
-        else {
+        if (!userRepo.updateAUser(newUser)){
             throw new ResourcePersistenceException("There was a problem trying to update the user");
         }
     }
 
-
-    public User getUserById(int id) {
-        if (id <= 0){
-            throw new InvalidRequestException("tHE PROVIDED ID CANNOT BE LESS THAN OR EQUAL TO ZERO");
-        }
-        return userRepo.getAUserById(id).orElseThrow(ResourceNotFoundException::new);
-    }
-
+    /**
+     * Deletes a user by changing their role to 4
+     * @param id id of user to delete
+     * @return true if role was updated in db
+     */
     public boolean deleteUserById(int id) {
         if (id <= 0){
             throw new InvalidRequestException("tHE PROVIDED ID CANNOT BE LESS THAN OR EQUAL TO ZERO");
         }
         return userRepo.deleteAUserById(id);
     }
-    public User getUserByEmail(String email) {
-        if (email == null || email.trim().equals("")){
-            throw new InvalidRequestException("tHE PROVIDED EMAIL CANNOT BE BLANK");
-        }
-        return userRepo.getAUserByEmail(email).orElseThrow(ResourceNotFoundException::new);
-    }
-    public List<User> getUsersByRole(String role) {
-        if (role == null || role.isEmpty() || role.trim().equals("")){
-            throw new InvalidRequestException("tHE PROVIDED ROLE DOES NOT EXIST");
-        }
-        List<User> users = userRepo.getAllUsersByRole(Role.getByName(role));
-        if (users.isEmpty()){
-            throw new ResourceNotFoundException();
-        }
-        return users;
-    }
 
+    /**
+     * Method for simple checking of availability of username
+     * @param username username to chek
+     * @return true if available
+     */
     public boolean isUsernameAvailable(String username) {
         User user = userRepo.getAUserByUsername(username).orElse(null);
         return user == null;
     }
 
+    /**
+     * Method for simple checking of availability of email
+     * @param email
+     * @return true if available
+     */
     public boolean isEmailAvailable(String email) {
         User user = userRepo.getAUserByEmail(email).orElse(null);
         return user == null;
