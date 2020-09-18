@@ -18,6 +18,7 @@ import java.util.*;
  * A class to interact with the database to CRUD reimbursement objects
  */
 public class ReimbursementsRepository {
+    //base query that combines the name and resolver names from one query
     private String baseQuery = "SELECT er.id, er.amount, er.description, er.reimbursement_status_id, \n" +
             "er.reimbursement_type_id, er.resolved, er.submitted,  er.author_id , er.resolver_id,\n" +
             "author.first_name as author_first_name , author.last_name as author_last_name , \n" +
@@ -382,21 +383,6 @@ public class ReimbursementsRepository {
     }
 
 
-    public void addReimbursementImage() throws SQLException, IOException {
-        //TODO: create an add image method to recieve and transmit images
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-            File file = new File("myimage.gif");
-            FileInputStream fis = new FileInputStream(file);
-            PreparedStatement ps = conn.prepareStatement(baseInsert + "(reciept) VALUES (?, ?) WHERE ers_reimbursements.id=? ");
-            ps.setString(1, file.getName());
-            ps.setBinaryStream(2, fis, file.length());
-            //TODO: get image ID and attach
-            ps.executeUpdate();
-            ps.close();
-            fis.close();
-        }
-    }
-
     //---------------------------------- DELETE -------------------------------------------- //
 
     /**
@@ -437,28 +423,9 @@ public class ReimbursementsRepository {
             temp.setResolverId(rs.getInt("resolver_id"));
             temp.setReimbursementStatus(ReimbursementStatus.getByNumber(rs.getInt("reimbursement_status_id")));
             temp.setReimbursementType(ReimbursementType.getByNumber(rs.getInt("reimbursement_type_id")));
-//            temp.setReimbursementType(ReimbursementType.getByName(rs.getInt("reimbursement_type_id")));
-            reimbursements.add(temp);
-        }
-        return reimbursements;
-    }
 
-    private List<Reimbursement> mapResultSetList(ResultSet rs) throws SQLException {
-        List<Reimbursement> reimbursements = new ArrayList<>();
-        while (rs.next()){
-            Reimbursement temp = new Reimbursement();
-            temp.setId(rs.getInt("id"));
-            temp.setAmount(rs.getDouble("amount"));
-            temp.setSubmitted(rs.getTimestamp("submitted"));
-            temp.setResolved(rs.getTimestamp("resolved"));
-            temp.setDescription(rs.getString("description"));
-            temp.setAuthorId(rs.getInt("author_id"));
-            temp.setResolverId(rs.getInt("resolver_id"));
-            temp.setReimbursementStatus(ReimbursementStatus.getByNumber(rs.getInt("reimbursement_status_id")));
-            temp.setReimbursementType(ReimbursementType.getByNumber(rs.getInt("reimbursement_type_id")));
             reimbursements.add(temp);
         }
-        System.out.println(reimbursements);
         return reimbursements;
     }
 

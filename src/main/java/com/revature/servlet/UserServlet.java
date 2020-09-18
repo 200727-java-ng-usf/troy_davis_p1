@@ -21,10 +21,16 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A webserlet to handle servicing of users from the system
+ */
 @WebServlet("/users/*")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserService();
 
+    /**
+     *Do Get to get users from the DB. Route guarded based on logged in User Role
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -34,32 +40,6 @@ public class UserServlet extends HttpServlet {
         System.out.println(req.getRequestURI());
         System.out.println(req.getParameter("id"));
         try {
-//            String idParam = req.getParameter("id");
-//            String emailParam = req.getParameter("email");
-//            String roleParam = req.getParameter("role");
-//            if (idParam != null){
-//                //Get the user by id if present
-//                int id = Integer.parseInt(idParam);
-//                User user = userService.getUserById(id);
-//                String userJSON = mapper.writeValueAsString(user);
-//                writer.write(userJSON);
-//                resp.setStatus(200);
-//            }
-//            if (emailParam != null){
-//                //Get the user by id if present
-//                User user = userService.getUserByEmail(emailParam);
-//                String userJSON = mapper.writeValueAsString(user);
-//                writer.write(userJSON);
-//                resp.setStatus(200);
-//            }
-//            if (roleParam != null){
-//                //Get all users by role if present
-//                List<User> users = userService.getUsersByRole(roleParam);
-//                String userJSON = mapper.writeValueAsString(users);
-//                writer.write(userJSON);
-//                resp.setStatus(200);
-//            }
-
             Integer loggedInRole = (Integer) req.getSession().getAttribute("loggedinrole");
             //check to see if Admin role before sending all users
             if (loggedInRole == 1){
@@ -103,18 +83,15 @@ public class UserServlet extends HttpServlet {
             //create new appuser from the json request
             User newUser = mapper.readValue(req.getInputStream(),User.class);
             userService.register(newUser);
-            System.out.println(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
             respWriter.write(newUserJSON);
             resp.setStatus(201); // 201 = created
         }catch (MismatchedInputException upe) {
-            upe.printStackTrace();
             resp.setStatus(400);
             ErrorResponse err = new ErrorResponse(400,"Bad Request: malformed user object found in request body");
             respWriter.write(mapper.writeValueAsString(err));
 
         }catch (Exception e){
-            e.printStackTrace();
             resp.setStatus(500); //500 = internal server error
             ErrorResponse err = new ErrorResponse(500,"server: my bad.");
             respWriter.write(mapper.writeValueAsString(err));
@@ -122,21 +99,18 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
-
         try {
             Integer loggedInRole = (Integer) req.getSession().getAttribute("loggedinrole");
             if (loggedInRole == 1){
                 User updatedUser = mapper.readValue(req.getInputStream(),User.class);
-                System.out.println(updatedUser.toString());
                 userService.update(updatedUser);
                 resp.setStatus(201); // 201 = created
             }
         } catch (Exception e){
-            e.printStackTrace();
             resp.setStatus(500); //500 = internal server error
             ErrorResponse err = new ErrorResponse(500,"server: my bad.");
             respWriter.write(mapper.writeValueAsString(err));
@@ -148,18 +122,15 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
-
         try {
             Integer loggedInRole = (Integer) req.getSession().getAttribute("loggedinrole");
             if (loggedInRole == 1){
                 int idParam = Integer.parseInt(req.getParameter("id"));
-                System.out.println("id to delete: " + idParam);
                 if (userService.deleteUserById(idParam)) {
                     resp.setStatus(201); // 201 = created
                 }
             }
         } catch (Exception e){
-            e.printStackTrace();
             resp.setStatus(500); //500 = internal server error
             ErrorResponse err = new ErrorResponse(500,"server: my bad.");
             respWriter.write(mapper.writeValueAsString(err));

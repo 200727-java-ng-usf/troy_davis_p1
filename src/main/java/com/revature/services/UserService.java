@@ -20,7 +20,10 @@ import java.util.Set;
  */
 public class UserService {
     private UserRepository userRepo = new UserRepository();
-
+    /**
+     * Gets all users from the DataBase
+     * @return A list of Users
+     */
     public List<User> getAllUsers(){
         List<User> users = userRepo.getAllusers();
         if (users.isEmpty()){
@@ -29,9 +32,13 @@ public class UserService {
         return users;
     }
 
-
+    /**
+     * Authentication method used by the authentication servlet
+     * @param username username of the user
+     * @param password password of the user
+     * @return the object of the requested user
+     */
     public User authenticate(String username, String password){
-
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")){
             throw new InvalidRequestException("Invalid credentials provided");
         }
@@ -39,29 +46,35 @@ public class UserService {
                 .orElseThrow(AuthenticationException::new);
     }
 
-
+    /**
+     * Register a new user in the DB. validates all fields first
+     * @param newUser completed user object
+     */
     public void register(User newUser) {
         if (!isUserValid(newUser)) {
             throw new InvalidRequestException("Invalid user field values provided during registration!");
         }
         Optional<User> existingUser = userRepo.getAUserByUsername(newUser.getUsername());
-
         if (existingUser.isPresent()) {
-            // TODO implement a custom ResourcePersistenceException
             throw new ResourcePersistenceException("Username is already in use");
         }
         Optional<User> existingUserEmail = userRepo.getAUserByEmail(newUser.getEmail());
         if (existingUserEmail.isPresent()) {
-            // TODO implement a custom ResourcePersistenceException
             throw new ResourcePersistenceException("Email is already in use");
         }
         newUser.setUserRole(Role.EMPLOYEE.ordinal() + 1);
         userRepo.addUser(newUser);
         System.out.println(newUser);
-//        app.setCurrentUser(newUser);
     }
 
+    /**
+     * Update a user in the DB.
+     * @param newUser
+     */
     public void update(User newUser) {
+        if (!isUserValid(newUser)) {
+            throw new InvalidRequestException("Invalid user field values provided during registration!");
+        }
         if (userRepo.updateAUser(newUser)){
             System.out.println(newUser);
         }

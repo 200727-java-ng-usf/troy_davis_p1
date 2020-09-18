@@ -19,10 +19,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Main Servlet for authenticating users
+ */
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
+    /**
+     * Main responding method for authentication of users
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -51,7 +57,6 @@ public class AuthServlet extends HttpServlet {
             String errJSON = mapper.writeValueAsString(err);
             respWriter.write(errJSON);
         } catch (Exception e) {
-            e.printStackTrace();
             resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
             ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad...");
             respWriter.write(mapper.writeValueAsString(err));
@@ -60,10 +65,6 @@ public class AuthServlet extends HttpServlet {
 
     /**
      * Logs the current user out/ Invalidates the current session
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -16,7 +16,6 @@ public class ValidationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         boolean isValid = new ValidationHelper().process(req);
-
         if (isValid) {
             resp.setStatus(204);
         } else {
