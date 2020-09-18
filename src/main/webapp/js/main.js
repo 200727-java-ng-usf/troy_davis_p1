@@ -9,7 +9,7 @@ window.onload = function() {
 }
 
 function loadLogin() {
-    console.log('in loadLogin()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'login.view', true); // third parameter (default true) indicates we want to make this req async
     xhr.send();
@@ -21,7 +21,7 @@ function loadLogin() {
     }
 }
 function loadLanding() {
-    console.log('in loadLanding()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'landing.view', true); // third parameter (default true) indicates we want to make this req async
     xhr.send();
@@ -33,7 +33,7 @@ function loadLanding() {
     }
 }
 function loadSuccess() {
-    console.log('in loadSuccess()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'success.view'); // third parameter (default true) indicates we want to make this req async
     xhr.send();
@@ -45,7 +45,7 @@ function loadSuccess() {
     }
 }
 function loadFailure() {
-    console.log('in loadFailure()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'failure.view', true); // third parameter (default true) indicates we want to make this req async
     xhr.send();
@@ -56,7 +56,7 @@ function loadFailure() {
     }
 }
 function loadRegister() {
-    console.log('in loadRegister()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'register.view'); // third parameter of this method is optional (defaults to true)
     xhr.send();
@@ -68,7 +68,7 @@ function loadRegister() {
     }
 }
 function loadAddUser() {
-    console.log('in loadAddUser()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'admin_add_user.view'); // third parameter of this method is optional (defaults to true)
     xhr.send();
@@ -81,7 +81,7 @@ function loadAddUser() {
 }
 
 function loadSubmitReimb(){
-    console.log('in loadSubmitReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'submit_reimb.view'); // third parameter of this method is optional (defaults to true)
     xhr.send();
@@ -94,7 +94,7 @@ function loadSubmitReimb(){
 }
 
 function loadViewEmpReimb(){
-    console.log('in loadViewReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_emp_reimb.view'); // third parameter of this method is optional (defaults to true)
     xhr.send();
@@ -107,7 +107,7 @@ function loadViewEmpReimb(){
 }
 
 function loadViewAllUsers() {
-    console.log('in loadViewAllUsers');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_users.view'); 
     xhr.send();
@@ -120,7 +120,7 @@ function loadViewAllUsers() {
 }
 
 function loadViewAllReimb() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -132,7 +132,7 @@ function loadViewAllReimb() {
     }
 }
 function loadViewAllReimbByTypeFood() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -144,7 +144,7 @@ function loadViewAllReimbByTypeFood() {
     }
 }
 function loadViewAllReimbByTypeLodging() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -156,7 +156,7 @@ function loadViewAllReimbByTypeLodging() {
     }
 }
 function loadViewAllReimbByTypeTravel() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -168,7 +168,7 @@ function loadViewAllReimbByTypeTravel() {
     }
 }
 function loadViewAllReimbByTypeOther() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -180,7 +180,7 @@ function loadViewAllReimbByTypeOther() {
     }
 }
 function loadViewAllReimbByStatusPending() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -192,7 +192,7 @@ function loadViewAllReimbByStatusPending() {
     }
 }
 function loadViewAllReimbByStatusApproved() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -204,7 +204,7 @@ function loadViewAllReimbByStatusApproved() {
     }
 }
 function loadViewAllReimbByStatusDenied() {
-    console.log('in loadViewAllReimb()');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'view_all_reimb.view'); 
     xhr.send();
@@ -334,9 +334,7 @@ function loadDeleteUser(obj){
 }
 
 function loadHome() {
-    console.log('in loadHome()');
     if (!localStorage.getItem('authUser')) {
-        console.log('No user logged in, navigating to login screen');
         loadLogin();
         return;
     }
@@ -363,14 +361,12 @@ function configureSuccess(){
 }
 
 function configureLandingView() {
-    console.log('in configureLandingView()');
     document.getElementById('login').addEventListener('click', loadLogin);
     document.getElementById('createAccount').addEventListener('click', loadRegister);
 
 }
 
 function configureLoginView() {
-    console.log('in configureLoginView()');
     document.getElementById('login-message').setAttribute('hidden', true);
     document.getElementById('login-button-container').addEventListener('mouseover', validateLoginForm);
     document.getElementById('login').addEventListener('click', login);
@@ -381,8 +377,6 @@ function configureHomeView() {
     document.getElementById('loggedInUsername').innerText = authUser.username;
     var homeUser = JSON.parse(localStorage.getItem('authUser'));
     var role = homeUser.role;
-    console.log('the current role is: ');
-    console.log(role);
     if(role == 3){
         //Employee
         document.getElementById('submit-reimb').addEventListener('click', loadSubmitReimb);
@@ -400,7 +394,6 @@ function configureHomeView() {
 }
 
 function configureRegisterView() {
-    console.log('in configureRegisterView()');
     document.getElementById('reg-message').setAttribute('hidden', true);
     document.getElementById('reg-username').addEventListener('blur', isUsernameAvailable);
     document.getElementById('email').addEventListener('blur', isEmailAvailable);
@@ -410,7 +403,6 @@ function configureRegisterView() {
 }
 
 function configureAddUserView() {
-    console.log('in configureRegisterView()');
     document.getElementById('reg-message').setAttribute('hidden', true);
     document.getElementById('reg-username').addEventListener('blur', isUsernameAvailable);
     document.getElementById('email').addEventListener('blur', isEmailAvailable);
@@ -429,7 +421,6 @@ function configureSubmitReimbView() {
 }
 
 function configureViewAllUsersView() {
-    console.log('Getting All Users...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'users');
     xhr.send()
@@ -437,7 +428,6 @@ function configureViewAllUsersView() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var myTableDiv = document.getElementById("view-users-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -465,7 +455,6 @@ function configureViewAllUsersView() {
     }
 }
 function configureViewEmpReimbView() {
-    console.log('Getting Reimbursements for employee...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements'); // third parameter of this method is optional (defaults to true)
     xhr.send()
@@ -474,7 +463,6 @@ function configureViewEmpReimbView() {
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -514,7 +502,6 @@ function configureViewAllReimbView(){
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements'); 
     xhr.send()
@@ -523,7 +510,6 @@ function configureViewAllReimbView(){
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -553,7 +539,6 @@ function  configureViewAllReimbByTypeFoodView(){
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?type=3'); 
     xhr.send()
@@ -562,7 +547,6 @@ function  configureViewAllReimbByTypeFoodView(){
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -592,7 +576,6 @@ function  configureViewAllReimbByTypeLodgingView(){
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?type=1'); 
     xhr.send()
@@ -601,7 +584,6 @@ function  configureViewAllReimbByTypeLodgingView(){
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -631,7 +613,6 @@ function  configureViewAllReimbByTypeTravelView(){
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?type=2'); 
     xhr.send()
@@ -640,7 +621,6 @@ function  configureViewAllReimbByTypeTravelView(){
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -670,7 +650,6 @@ function  configureViewAllReimbByTypeOtherView(){
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?type=4'); 
     xhr.send()
@@ -679,7 +658,6 @@ function  configureViewAllReimbByTypeOtherView(){
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -709,7 +687,6 @@ function configureViewAllReimbByStatusPendingView() {
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?status=1'); 
     xhr.send()
@@ -718,7 +695,6 @@ function configureViewAllReimbByStatusPendingView() {
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -748,7 +724,6 @@ function configureViewAllReimbByStatusApprovedView() {
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?status=2'); 
     xhr.send()
@@ -757,7 +732,6 @@ function configureViewAllReimbByStatusApprovedView() {
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -787,7 +761,6 @@ function configureViewAllReimbByStatusDeniedView() {
     document.getElementById('get-by-status-approved').addEventListener('click', loadViewAllReimbByStatusApproved);
     document.getElementById('get-by-status-denied').addEventListener('click', loadViewAllReimbByStatusDenied);
     document.getElementById('view-all-reimb').addEventListener('click', loadViewAllReimb);
-    console.log('Getting All Reimbursements...');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbursements?status=3'); 
     xhr.send()
@@ -796,7 +769,6 @@ function configureViewAllReimbByStatusDeniedView() {
             // APP_VIEW.innerHTML = xhr.responseText;
             var myTableDiv = document.getElementById("view-all-reimb-table");
             const reimbs = JSON.parse(xhr.responseText);
-            console.log(reimbs);
             for (var i = 0; i < reimbs.length; i++){
                 var rowCount = myTableDiv.rows.length;
                 var row = myTableDiv.insertRow(rowCount);
@@ -820,7 +792,6 @@ function configureViewAllReimbByStatusDeniedView() {
 //------------------OPERATIONS-----------------------
 
 function updateReimb() {
-    console.log('in updating reimb');
     let rid = document.getElementById('reimbID').innerHTML;
     let tp = document.getElementById('type').value;
     let ds = document.getElementById('description').value;
@@ -843,7 +814,6 @@ function updateReimb() {
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             // loadFailure();
             let err = JSON.parse(xhr.responseText);
-            console.log(err.message);
         }
     }
 }
@@ -851,7 +821,6 @@ function updateReimb() {
 
 
 function approveReimb() {
-    console.log('in approve reimb');
     let rid = document.getElementById('reimbID').innerHTML;
     let status = 2;
     let xhr = new XMLHttpRequest();
@@ -869,13 +838,11 @@ function approveReimb() {
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             // loadFailure();
             let err = JSON.parse(xhr.responseText);
-            console.log(err.message);
         }
     }
 }
 
 function denyReimb(){
-    console.log('in approve reimb');
     let rid = document.getElementById('reimbID').innerHTML;
     let status = 3;
     let xhr = new XMLHttpRequest();
@@ -893,14 +860,12 @@ function denyReimb(){
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             // loadFailure();
             let err = JSON.parse(xhr.responseText);
-            console.log(err.message);
         }
     }
 }
 
 
 function submitReimb(){
-    console.log('in submitting reimb')
     let tp = document.getElementById('type').value;
     let ds = document.getElementById('description').value;
     let am = document.getElementById('amount').value;
@@ -911,7 +876,6 @@ function submitReimb(){
         amount: am,
         
     }
-    console.log(thisReimb);
     let reimbJSON = JSON.stringify(thisReimb);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'reimbursements');
@@ -924,13 +888,11 @@ function submitReimb(){
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             // loadFailure();
             let err = JSON.parse(xhr.responseText);
-            console.log(err.message);
         }
     }
 }
 
 function login() {
-    console.log('in login()');
     let un = document.getElementById('login-username').value;
     let pw = document.getElementById('login-password').value;
     let credentials = {
@@ -983,7 +945,6 @@ function delete_user() {
 }
 
 function update_user() {
-    console.log('in register()');
     let uID = localStorage.getItem('userID');
     let fn = document.getElementById('fn').value;
     let ln = document.getElementById('ln').value;
@@ -1026,7 +987,6 @@ function update_user() {
 }
 
 function addUser() {
-    console.log('in register()');
     let fn = document.getElementById('fn').value;
     let ln = document.getElementById('ln').value;
     let email = document.getElementById('email').value;
@@ -1067,7 +1027,6 @@ function addUser() {
 }
 
 function register() {
-    console.log('in register()');
     let fn = document.getElementById('fn').value;
     let ln = document.getElementById('ln').value;
     let email = document.getElementById('email').value;
@@ -1096,13 +1055,11 @@ function register() {
 }
 
 function logout() {
-    console.log('in logout()');
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'auth');
     xhr.send();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 204) {
-            console.log('logout successful!');
             localStorage.removeItem('authUser');
             loadLogin();
         }
@@ -1113,7 +1070,6 @@ function logout() {
 //---------------------FORM VALIDATION-------------------------
 
 function isUsernameAvailable() {
-    console.log('in isUsernameAvailable()');
     let username = document.getElementById('reg-username').value;
     if (!username) {
         return;
@@ -1124,7 +1080,6 @@ function isUsernameAvailable() {
     xhr.send(JSON.stringify(username));
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 204) {
-            console.log('Provided username is available!');
             document.getElementById('reg-message').setAttribute('hidden', true);
         } else if (xhr.readyState == 4 && xhr.status == 409 ) {
             document.getElementById('reg-message').removeAttribute('hidden')
@@ -1136,7 +1091,6 @@ function isUsernameAvailable() {
 }
 
 function isEmailAvailable() {
-    console.log('in isEmailAvailable()');
     let email = document.getElementById('email').value;
     if (!email) {
         return;
@@ -1147,7 +1101,6 @@ function isEmailAvailable() {
     xhr.send(JSON.stringify(email));
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 204) {
-            console.log('Provided email is available!');
             document.getElementById('reg-message').setAttribute('hidden', true);
         } else if (xhr.readyState == 4 && xhr.status == 409) {
             document.getElementById('reg-message').removeAttribute('hidden');
@@ -1159,7 +1112,6 @@ function isEmailAvailable() {
 
 
 function validateLoginForm() {
-    console.log('in validateLoginForm()');
     let msg = document.getElementById('login-message').innerText;
     if (msg == 'User authentication failed!') {
         return;
@@ -1177,7 +1129,6 @@ function validateLoginForm() {
 }
 
 function validateRegisterForm() {
-    console.log('in validateRegisterForm()');
     let fn = document.getElementById('fn').value;
     let ln = document.getElementById('ln').value;
     let email = document.getElementById('email').value;
@@ -1193,7 +1144,6 @@ function validateRegisterForm() {
     }
 }
 function validateReimbursementForm() {
-    console.log('in validateReimbursementForm()');
     let am = document.getElementById('amount').value;
     let ds = document.getElementById('description').value;
     let ty = document.getElementById('type').value;
